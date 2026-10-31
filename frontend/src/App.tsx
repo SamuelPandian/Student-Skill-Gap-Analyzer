@@ -9,7 +9,7 @@ import { AlternativeCareers } from './components/AlternativeCareers';
 
 import { Sparkles, Flame, RefreshCw, CheckCircle, AlertCircle, RotateCcw } from 'lucide-react';
 
-const API_BASE = "http://localhost:8000/api/v1";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000/api/v1";
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('dashboard');
@@ -242,7 +242,7 @@ export const App: React.FC = () => {
 
   // Initial load: check connection without overriding clean reset state
   useEffect(() => {
-    fetch(`http://localhost:8000/api/v1/jobs/1`)
+    fetch(`${API_BASE}/jobs/1`)
       .then(res => { if (res.ok) setIsLiveConnected(true); })
       .catch(() => setIsLiveConnected(false));
   }, []);
